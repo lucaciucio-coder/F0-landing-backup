@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formula 0 — Sistema Multi Affiliate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #15803d;
+      --blue: #1d4ed8;
+      --blue-dark: #1e3a8a;
+      --black: #0a0a0a;
+      --white: #ffffff;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* TIMER BOLLA */
+    .timer-wrap {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .timer-card {
+      background: #fff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 50px;
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      max-width: 680px;
+      width: 100%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .timer-card p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      white-space: nowrap;
+    }
+
+    .timer-digits {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1.5px solid #ddd;
+      border-radius: 12px;
+      padding: 8px 16px;
+      flex-shrink: 0;
+    }
+
+    .timer-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 36px;
+    }
+
+    .timer-unit span:first-child {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      color: #16a34a;
+      line-height: 1;
+    }
+
+    .timer-unit span:last-child {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #111;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .timer-sep {
+      font-size: 20px;
+      font-weight: 800;
+      color: #16a34a;
+      padding-bottom: 10px;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 36px 20px 24px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero .eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(24px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 .green { color: var(--green); }
+
+    .hero .subhead {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(15px, 2.2vw, 20px);
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--black);
+    }
+
+    .hero .subhead .green { color: var(--green); }
+
+    .hero .tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(14px, 1.8vw, 18px);
+      font-weight: 700;
+      color: var(--black);
+      margin-top: 10px;
+    }
+
+    /* VIDEO */
+    .video-wrap {
+      max-width: 860px;
+      margin: 24px auto 0;
+      padding: 0 20px;
+    }
+
+    .video-cover {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000 url('NMehExE6.png') center center / cover no-repeat;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-cover .play-btn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: 3px solid rgba(255,255,255,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .video-cover:hover .play-btn {
+      transform: scale(1.1);
+      background: rgba(255,255,255,0.35);
+    }
+
+    .video-cover .play-btn svg {
+      width: 32px; height: 32px;
+      fill: #fff;
+      margin-left: 5px;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 40px 20px 24px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(15px, 2vw, 18px);
+      font-weight: 800;
+      padding: 18px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      animation: bounce 2.5s ease-in-out infinite;
+      transition: background 0.2s;
+      letter-spacing: 0.01em;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .cta-btn:hover {
+      background: var(--blue-dark);
+      animation: none;
+    }
+
+    .social-proof {
+      margin-top: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      min-height: 20px;
+      transition: opacity 0.4s;
+    }
+
+    /* POPUP */
+    #vsl-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #vsl-modal-bg.active { display: flex; }
+
+    #vsl-modal {
+      background: #fff;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      overflow: visible;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    #vsl-close {
+      position: absolute;
+      top: -14px; right: -14px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #333;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .progress-wrap {
+      margin: 20px 20px 0;
+      background: #e5e5e5;
+      border-radius: 4px;
+      height: 36px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 80%;
+      height: 100%;
+      background: #111;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-bar span {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .modal-body { padding: 16px 24px 28px; }
+
+    #vsl-modal h2 {
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 900;
+      color: #111;
+      margin: 0 0 20px;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    #vsl-modal h2 a {
+      color: #16a34a;
+      text-decoration: underline;
+      font-weight: 900;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    #vsl-modal input[type="text"] {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    #vsl-modal input[type="text"]:focus { border-color: #333; }
+
+    .phone-wrap {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .phone-wrap:focus-within { border-color: #333; }
+
+    .phone-flag {
+      padding: 0 10px;
+      border-right: 1px solid #ccc;
+      background: #f9f9f9;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: #555;
+      flex-shrink: 0;
+    }
+
+    .phone-wrap input[type="tel"] {
+      border: none !important;
+      flex: 1;
+      padding: 13px 14px;
+      font-size: 14px;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .gdpr-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0 0 20px;
+    }
+
+    .gdpr-row input[type="checkbox"] {
+      margin-top: 2px;
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+      accent-color: #16a34a;
+    }
+
+    .gdpr-row label {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.6;
+    }
+
+    .gdpr-row label a { color: #555; text-decoration: underline; }
+
+    #vsl-btn {
+      width: 100%;
+      padding: 16px;
+      background: #16a34a;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      transition: background 0.2s;
+    }
+
+    #vsl-btn:hover { background: #15803d; }
+    #vsl-btn:disabled { background: #aaa; cursor: not-allowed; }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 12px;
+      color: #bbb;
+      border-top: 1px solid #eee;
+      margin-top: 40px;
+    }
+
+    footer a { color: #bbb; text-decoration: underline; }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .timer-card {
+        flex-direction: column;
+        align-items: center;
+        border-radius: 20px;
+        gap: 12px;
+        padding: 16px 20px;
+      }
+      .timer-card p { white-space: normal; text-align: center; }
+      .cta-btn { padding: 16px 20px; }
+      .modal-body { padding: 14px 16px 24px; }
+      #vsl-modal h2 { font-size: 17px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TIMER BOLLA -->
+  <div class="timer-wrap">
+    <div class="timer-card">
+      <p>Guarda il video prima dello scadere del timer</p>
+      <div class="timer-digits">
+        <div class="timer-unit"><span id="t-h">03</span><span>Ore</span></div>
+        <span class="timer-sep">:</span>
+        <div class="timer-unit"><span id="t-m">59</span><span>Minuti</span></div>
+        <span class="timer-sep">:</span>
+        <div class="timer-unit"><span id="t-s">59</span><span>Secondi</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="eyebrow">Video Gratuito Rivela...</p>
+    <h1>Come Ragazzi Senza Esperienza<br>Stanno Costruendo <span class="green">Un'Entrata<br>Extra Online</span> Nel 2026</h1>
+    <p class="subhead">Generando Tra i <span class="green">500 e i 3.000€</span> Al Mese —<br>In Meno Di <span class="green">1 Ora Al Giorno</span>, Senza Mostrare La Faccia, Partendo Da Zero.</p>
+    <p class="tagline">Ti Mostro Il Sistema Completo In 10 Minuti.</p>
+  </section>
+
+  <!-- VIDEO -->
+  <div class="video-wrap">
+    <div class="video-cover" id="video-cover" onclick="document.getElementById('vsl-modal-bg').classList.add('active')">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+    </div>
+    <div id="video-player" style="display:none; width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden;">
+      <iframe id="yt-iframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:block;"></iframe>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="#" class="cta-btn">Prenota la tua Consulenza GRATUITA</a>
+    <p class="social-proof" id="social-proof"></p>
+  </div>
+
+  <footer>
+    <p>© 2026 Formula 0 · Luca Puleo · <a href="https://formula-0.systeme.io/c91a3235" target="_blank">Privacy Policy</a></p>
+  </footer>
+
+  <!-- POPUP -->
+  <div id="vsl-modal-bg">
+    <div id="vsl-modal">
+      <button id="vsl-close" onclick="document.getElementById('vsl-modal-bg').classList.remove('active')">&#x2715;</button>
+      <div class="progress-wrap">
+        <div class="progress-bar"><span>Quasi Completato...</span></div>
+      </div>
+      <div class="modal-body">
+        <h2>Inserisci I Tuoi Dati Per Avere Accesso <a href="#" style="white-space:nowrap;">al Video Gratuito + Guida</a></h2>
+        <label class="field-label">Nome e Cognome</label>
+        <input type="text" id="vsl-nome" placeholder="Nome completo" />
+        <label class="field-label">Whatsapp *</label>
+        <div class="phone-wrap">
+          <div class="phone-flag">🇮🇹 ▾</div>
+          <input type="tel" id="vsl-phone" placeholder="Numero" />
+        </div>
+        <div class="gdpr-row">
+          <input type="checkbox" id="vsl-gdpr" />
+          <label for="vsl-gdpr">
+            Come da Regolamento UE 2016/679 – GDPR, ho preso visione e accetto l'<a href="https://formula-0.systeme.io/c91a3235" target="_blank">informativa della Privacy Policy</a>.
+          </label>
+        </div>
+        <button id="vsl-btn" onclick="vslSubmit()">Si Voglio Guardare il Video Gratuito!</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // TIMER
+    var totalSeconds = 3 * 3600 + 59 * 60 + 59;
+    function updateTimer() {
+      var h = Math.floor(totalSeconds / 3600);
+      var m = Math.floor((totalSeconds % 3600) / 60);
+      var s = totalSeconds % 60;
+      document.getElementById('t-h').textContent = String(h).padStart(2,'0');
+      document.getElementById('t-m').textContent = String(m).padStart(2,'0');
+      document.getElementById('t-s').textContent = String(s).padStart(2,'0');
+      if (totalSeconds > 0) totalSeconds--;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    // SOCIAL PROOF
+    var proofMessages = [
+      '1 persona ha cliccato negli ultimi minuti',
+      '2 persone hanno cliccato negli ultimi minuti',
+      '3 persone stanno guardando questa pagina',
+      '1 persona ha appena prenotato una chiamata',
+      '4 persone hanno cliccato oggi',
+    ];
+    function showRandomProof() {
+      var el = document.getElementById('social-proof');
+      el.style.opacity = '0';
+      setTimeout(function() {
+        el.textContent = proofMessages[Math.floor(Math.random() * proofMessages.length)];
+        el.style.opacity = '1';
+      }, 400);
+    }
+    showRandomProof();
+    setInterval(showRandomProof, 12000);
+
+    // POPUP SUBMIT
+    function vslSubmit() {
+      var nome = document.getElementById('vsl-nome').value.trim();
+      var phone = document.getElementById('vsl-phone').value.trim();
+      var gdpr = document.getElementById('vsl-gdpr').checked;
+      var btn = document.getElementById('vsl-btn');
+
+      if (!nome) { alert('Inserisci il tuo nome e cognome per continuare.'); return; }
+      if (!phone) { alert('Inserisci il tuo numero WhatsApp per continuare.'); return; }
+      if (!gdpr) { alert('Devi accettare la Privacy Policy per continuare.'); return; }
+
+      btn.disabled = true;
+      btn.textContent = 'Caricamento...';
+
+      var nomeArr = nome.split(' ');
+      var firstName = nomeArr[0];
+      var lastName = nomeArr.slice(1).join(' ') || '-';
+
+      fetch('https://script.google.com/macros/s/AKfycbwqiTUsPBMasgzb8rPXsQG1Q1PfcyIjrjoMC8aPjb0SaFLQdCQN9aQJrNEKSuwmIqct/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ firstName: firstName, lastName: lastName, phone: phone })
+      })
+      .then(function() { vslUnlock(); })
+      .catch(function() { vslUnlock(); });
+    }
+
+    function vslUnlock() {
+      document.getElementById('vsl-modal-bg').classList.remove('active');
+      document.getElementById('video-cover').style.display = 'none';
+      document.getElementById('video-player').style.display = 'block';
+      document.getElementById('yt-iframe').src = 'https://www.youtube.com/embed/obrZBJx0sis?autoplay=1&rel=0';
+    }
+  </script>
+
+</body>
+</html>
