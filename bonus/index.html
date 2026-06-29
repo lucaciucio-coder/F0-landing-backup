@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Formula 0 — Scrivimi su Telegram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+--green: #16a34a;
+--green-dark: #15803d;
+--wa: #229ED9;
+--wa-dark: #1a8bbf;
+--black: #0a0a0a;
+}
+html, body { height: 100%; }
+body {
+background: #0a0a0a;
+color: #fff;
+font-family: 'Montserrat', sans-serif;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+padding: 48px 24px 32px;
+min-height: 100vh;
+min-height: 100dvh;
+text-align: center;
+}
+.wrap { max-width: 620px; width: 100%; margin: auto 0; }
+.eyebrow {
+font-size: clamp(13px, 2vw, 16px);
+font-weight: 600;
+font-style: italic;
+color: #9ca3af;
+margin-bottom: 18px;
+}
+h1 {
+font-size: clamp(26px, 5vw, 44px);
+font-weight: 900;
+line-height: 1.2;
+margin-bottom: 20px;
+}
+h1 .green { color: var(--green); }
+.sub {
+font-size: clamp(17px, 2.6vw, 22px);
+font-weight: 500;
+line-height: 1.7;
+color: #d1d5db;
+margin-bottom: 36px;
+}
+.sub strong { color: #fff; font-weight: 700; }
+.wa-btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+background: var(--wa);
+color: #fff;
+font-family: 'Montserrat', sans-serif;
+font-size: clamp(16px, 2.4vw, 21px);
+font-weight: 800;
+padding: 20px 40px;
+border-radius: 10px;
+text-decoration: none;
+border: none;
+cursor: pointer;
+width: 100%;
+max-width: 460px;
+transition: background 0.2s, transform 0.15s;
+animation: pulse 1.6s ease-in-out infinite;
+}
+.wa-btn:hover { background: var(--wa-dark); animation: none; transform: translateY(-2px); }
+.wa-btn svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
+@keyframes pulse {
+0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+50% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(37,211,102,0); }
+}
+.wa-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 26px; }
+.wa-avatar-wrap { position: relative; width: 110px; height: 110px; margin-bottom: 10px; }
+.wa-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid var(--wa); }
+.wa-online { position: absolute; bottom: 6px; right: 6px; width: 20px; height: 20px; background: var(--wa); border: 3px solid #0a0a0a; border-radius: 50%; }
+.wa-name { font-size: clamp(18px, 2.6vw, 22px); font-weight: 800; color: #fff; }
+.wa-status { font-size: clamp(12px, 1.6vw, 14px); font-weight: 500; color: var(--wa); margin-top: 2px; }
+.reassure {
+margin-top: 18px;
+font-size: clamp(12px, 1.6vw, 14px);
+color: #6b7280;
+font-weight: 500;
+}
+.logo {
+font-size: clamp(20px, 3vw, 26px);
+font-weight: 900;
+letter-spacing: 0.04em;
+margin-bottom: 32px;
+color: #fff;
+}
+.logo .zero { color: var(--green); }
+</style>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PR3JSDDC7M"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PR3JSDDC7M');
+</script>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "x6jl59epgw");
+</script>
+</head>
+<body>
+<div class="wrap">
+<div class="wa-header">
+<div class="wa-avatar-wrap">
+<img class="wa-avatar" src="luca.jpg" alt="Luca Puleo" />
+<span class="wa-online"></span>
+</div>
+<div class="wa-name">Luca Puleo</div>
+</div>
+<p class="eyebrow">Bonus App</p>
+<h1>Lo sai che esistono App che offrono un <span class="green" style="white-space:nowrap;">Bonus di benvenuto?</span></h1>
+<p class="sub">Ti spiego <strong>quali usare e come attivarle</strong>, passo dopo passo.<br><strong>Scrivimi su Telegram</strong> e ti spiego come funziona &#128071;</p>
+
+<a href="https://t.me/LucaPuleo?text=Ciao%20Luca!%20Ho%20visto%20la%20pubblicit%C3%A0%20sui%20bonus%20app%2C%20vorrei%20saperne%20di%20pi%C3%B9%20%F0%9F%99%8C" class="wa-btn" id="wa-btn" onclick="return trackTG(event)">
+<svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.26 13.947l-2.94-.918c-.64-.203-.654-.64.135-.954l11.566-4.461c.537-.194 1.006.131.873.607z"/></svg>
+Scrivimi su Telegram
+</a>
+
+<p class="reassure">Risposta diretta, nessun impegno.</p>
+</div>
+
+<script>
+function trackTG(e) {
+  // Tracciamento GA4 (protetto)
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'telegram_click', {
+        event_category: 'conversion',
+        event_label: 'bonus_landing'
+      });
+    }
+  } catch (err) {}
+  // Tracciamento Clarity (protetto)
+  try {
+    if (typeof clarity === 'function') {
+      clarity('event', 'telegram_click');
+    }
+  } catch (err) {}
+  return true;
+}
+</script>
+</body>
+</html>
